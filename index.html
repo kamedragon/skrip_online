@@ -1,0 +1,284 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <title>Free Skrip VSCode</title>
+  <style>
+    body { font-family: Arial, sans-serif; margin: 20px; background: #f4f4f4; }
+    h1 { text-align: center; }
+    .script-list { 
+      display: grid; 
+      grid-template-columns: repeat(auto-fit, minmax(350px, 1fr)); 
+      gap: 20px; 
+    }
+    .card { 
+      background: #fff; 
+      padding: 15px; 
+      border-radius: 10px; 
+      box-shadow: 0 2px 5px rgba(0,0,0,0.1); 
+      display: flex; 
+      flex-direction: column; 
+      justify-content: space-between;
+    }
+    pre { 
+      background: #eee; 
+      padding: 10px; 
+      border-radius: 5px; 
+      overflow-x: auto; 
+      max-height: 200px; 
+    }
+    button { 
+      margin-top: 10px; 
+      padding: 8px 12px; 
+      border: none; 
+      border-radius: 5px; 
+      cursor: pointer; 
+      background: #007bff; 
+      color: white; 
+    }
+    button:hover { background: #0056b3; }
+  </style>
+</head>
+<body>
+  <h1>🚀 Free Skrip VSCode (20 Skrip)</h1>
+  <p style="text-align:center;">Klik tombol untuk download script (ZIP).</p>
+
+  <div class="script-list" id="list"></div>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.7.1/jszip.min.js"></script>
+  <script>
+    function escapeHTML(str) {
+      return str.replace(/&/g, "&amp;")
+                .replace(/</g, "&lt;")
+                .replace(/>/g, "&gt;")
+                .replace(/"/g, "&quot;")
+                .replace(/'/g, "&#039;");
+    }
+
+    // ================== DAFTAR 20 SKRIP ==================
+    const scripts = [
+      {
+        title: "⭐ Hello World (HTML)",
+        name: "hello-world.html",
+        explain: "Script HTML sederhana untuk menampilkan teks Hello World.",
+        code: `<!DOCTYPE html>
+<html>
+  <body>
+    <h1>Hello World!</h1>
+  </body>
+</html>`
+      },
+      {
+        title: "⭐ Gaya Teks (CSS)",
+        name: "style.css",
+        explain: "CSS untuk memberi warna dan gaya pada teks.",
+        code: `h1 {
+  color: blue;
+  text-align: center;
+  font-family: Arial, sans-serif;
+}`
+      },
+      {
+        title: "⭐ Alert (JavaScript)",
+        name: "alert.js",
+        explain: "JavaScript untuk menampilkan pesan pop-up.",
+        code: `alert("Halo! Ini adalah pesan dari JavaScript!");`
+      },
+      {
+        title: "⭐ Tebak Angka (Python)",
+        name: "tebak-angka.py",
+        explain: "Game sederhana untuk menebak angka 1-10.",
+        code: `import random
+
+num = random.randint(1,10)
+guess = int(input("Tebak angka 1-10: "))
+print("Benar!" if guess==num else f"Salah, angka {num}")`
+      },
+      {
+        title: "⭐ Kalkulator (PHP)",
+        name: "calc.php",
+        explain: "Kalkulator sederhana dengan PHP.",
+        code: `<?php
+$a = 5; $b = 10;
+echo "Hasil: " . ($a + $b);
+?>`
+      },
+      {
+        title: "⭐ Print Hello (C)",
+        name: "hello.c",
+        explain: "Program sederhana dalam bahasa C.",
+        code: `#include <stdio.h>
+int main() {
+  printf("Hello, C!\\n");
+  return 0;
+}`
+      },
+      {
+        title: "⭐ Print Hello (C++)",
+        name: "hello.cpp",
+        explain: "Program sederhana dalam bahasa C++.",
+        code: `#include <iostream>
+using namespace std;
+int main() {
+  cout << "Hello, C++!" << endl;
+  return 0;
+}`
+      },
+      {
+        title: "⭐ Biodata (HTML)",
+        name: "biodata.html",
+        explain: "Form biodata sederhana.",
+        code: `<!DOCTYPE html>
+<html>
+<body>
+  <form>
+    Nama: <input type="text"><br>
+    Email: <input type="email"><br>
+    <button>Kirim</button>
+  </form>
+</body>
+</html>`
+      },
+      {
+        title: "⭐ Looping (Python)",
+        name: "loop.py",
+        explain: "Menampilkan angka 1-5 dengan loop.",
+        code: `for i in range(1,6):
+    print(i)`
+      },
+      {
+        title: "⭐ Validasi Umur (JavaScript)",
+        name: "umur.js",
+        explain: "Cek apakah umur >= 18.",
+        code: `let umur = 16;
+if (umur >= 18) {
+  console.log("Dewasa");
+} else {
+  console.log("Belum cukup umur");
+}`
+      },
+      {
+        title: "⭐ Tabel Sederhana (HTML)",
+        name: "table.html",
+        explain: "HTML untuk membuat tabel sederhana.",
+        code: `<table border="1">
+  <tr><th>Nama</th><th>Umur</th></tr>
+  <tr><td>Arya</td><td>15</td></tr>
+</table>`
+      },
+      {
+        title: "⭐ Hitung Faktorial (Python)",
+        name: "faktorial.py",
+        explain: "Program faktorial sederhana.",
+        code: `def faktorial(n):
+    return 1 if n==0 else n*faktorial(n-1)
+
+print(faktorial(5))`
+      },
+      {
+        title: "⭐ Background Warna (CSS)",
+        name: "bg.css",
+        explain: "Mengatur warna latar belakang.",
+        code: `body {
+  background-color: lightgreen;
+}`
+      },
+      {
+        title: "⭐ Fungsi Penjumlahan (JS)",
+        name: "sum.js",
+        explain: "Fungsi menjumlahkan dua angka.",
+        code: `function tambah(a,b){
+  return a+b;
+}
+console.log(tambah(3,4));`
+      },
+      {
+        title: "⭐ Login Form (HTML)",
+        name: "login.html",
+        explain: "Form login sederhana.",
+        code: `<form>
+  <input type="text" placeholder="Username"><br>
+  <input type="password" placeholder="Password"><br>
+  <button>Login</button>
+</form>`
+      },
+      {
+        title: "⭐ Perulangan While (Python)",
+        name: "while.py",
+        explain: "Contoh perulangan while.",
+        code: `i = 1
+while i <= 5:
+    print("Angka:", i)
+    i += 1`
+      },
+      {
+        title: "⭐ If Else (C)",
+        name: "ifelse.c",
+        explain: "Contoh penggunaan if-else.",
+        code: `#include <stdio.h>
+int main() {
+  int x = 5;
+  if (x > 3) printf("Lebih besar dari 3\\n");
+  else printf("Tidak lebih besar\\n");
+  return 0;
+}`
+      },
+      {
+        title: "⭐ Fungsi PHP",
+        name: "fungsi.php",
+        explain: "Membuat fungsi sederhana di PHP.",
+        code: `<?php
+function sapa($nama){
+  return "Halo, $nama!";
+}
+echo sapa("Arya");
+?>`
+      },
+      {
+        title: "⭐ Array JavaScript",
+        name: "array.js",
+        explain: "Array sederhana dengan looping.",
+        code: `let buah = ["Apel","Jeruk","Mangga"];
+buah.forEach(b => console.log(b));`
+      },
+      {
+        title: "⭐ Styling Form (CSS)",
+        name: "form.css",
+        explain: "Memberi gaya pada form input.",
+        code: `input, button {
+  padding: 8px;
+  margin: 5px;
+  border-radius: 5px;
+}`
+      }
+    ];
+
+    // =============== RENDER KARTU ===============
+    const container = document.getElementById("list");
+
+    scripts.forEach(s => {
+      const card = document.createElement("div");
+      card.className = "card";
+      card.innerHTML = `
+        <h2>${s.title}</h2>
+        <p>${s.explain}</p>
+        <pre><code>${escapeHTML(s.code)}</code></pre>
+        <button>⬇ Download ${s.name}</button>
+      `;
+      card.querySelector("button").onclick = () => {
+        const zip = new JSZip();
+        zip.file(s.name, s.code);
+        zip.generateAsync({ type: "blob" }).then(content => {
+          const a = document.createElement("a");
+          a.href = URL.createObjectURL(content);
+          a.download = s.name.replace(/\.[^.]+$/, "") + ".zip";
+          document.body.appendChild(a);
+          a.click();
+          document.body.removeChild(a);
+        });
+      };
+      container.appendChild(card);
+    });
+  </script>
+</body>
+</html>
